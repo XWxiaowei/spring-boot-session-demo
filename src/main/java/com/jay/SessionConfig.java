@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+import org.springframework.session.web.http.DefaultCookieSerializer;
 
 /**
  * @author xiang.wei
@@ -27,6 +28,13 @@ public class SessionConfig {
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(host, port);
         lettuceConnectionFactory.setDatabase(database);
         return lettuceConnectionFactory;
+    }
+
+    @Bean
+    public DefaultCookieSerializer defaultCookieSerializer() {
+        DefaultCookieSerializer defaultCookieSerializer = new DefaultCookieSerializer();
+        defaultCookieSerializer.setCookiePath("/");
+        return defaultCookieSerializer;
     }
 
 }
