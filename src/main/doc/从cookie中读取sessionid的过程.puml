@@ -1,5 +1,4 @@
 @startuml
-participant WebApplicationContextUtils
 participant SessionRepositoryFilter
 participant SessionRepositoryFilter.SessionRepositoryRequestWrapper
 participant CookieHttpSessionIdResolver
@@ -7,8 +6,6 @@ participant RedisOperationsSessionRepository
 participant DefaultCookieSerializer
 
 autonumber
-activate WebApplicationContextUtils
-WebApplicationContextUtils -> SessionRepositoryFilter: 调用getSession()方法
 activate SessionRepositoryFilter
 SessionRepositoryFilter -> SessionRepositoryFilter.SessionRepositoryRequestWrapper: 调用getSession(true)方法
 activate SessionRepositoryFilter.SessionRepositoryRequestWrapper
@@ -27,6 +24,5 @@ RedisOperationsSessionRepository --> SessionRepositoryFilter.SessionRepositoryRe
 deactivate RedisOperationsSessionRepository
 SessionRepositoryFilter.SessionRepositoryRequestWrapper --> SessionRepositoryFilter:返回HttpSession
 deactivate SessionRepositoryFilter.SessionRepositoryRequestWrapper
-SessionRepositoryFilter --> WebApplicationContextUtils:返回HttpSession
 deactivate SessionRepositoryFilter
 @enduml
